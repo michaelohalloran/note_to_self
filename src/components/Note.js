@@ -4,7 +4,7 @@ class Note extends React.Component {
     render() {
         return(
             <div className="note">
-                <p>{this.props.note}</p>
+                <p>{this.props.note.text}</p>
             </div>
         );
     }

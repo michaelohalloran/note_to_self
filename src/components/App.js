@@ -48,10 +48,8 @@ class App extends Component {
         const {notes, text} = this.state;
         // console.log(notes);
         // console.log(notes.isArray());
-        notes.push(this.state.text);
-        this.setState({
-            notes: notes
-        })
+        notes.push({text});
+        this.setState({notes});
         bake_cookie(cookie_key, this.state.notes);
     }
 
@@ -62,6 +60,9 @@ class App extends Component {
         this.setState({notes: []});
     }
     render() {
+        const notes = this.state.notes.map((note, index)=> {
+            return <Note key={index} note={note}/>
+        });
         return(
             <div>
                 <h2>Note to Self</h2>
@@ -72,9 +73,7 @@ class App extends Component {
                     {' '}
                     <Button onClick={(this.submit)}>Submit</Button>
                 </Form>
-                {this.state.notes.map((note, index)=> {
-                    return <Note key={index} note={note}/>
-                })}
+                {notes}
                 <hr/>
                 <Button onClick={this.clear}>Clear Notes</Button>
             </div>
